@@ -21,12 +21,12 @@ const registerAccount = async (req, res) => {
             return res.status(401).json({ message: "Passwords do not match", success: false })
         }
         const hashedPassword = bcryptjs.hashSync(password, 10)
-        await userAuth.create({
+    const data=    await userAuth.create({
             username,
             email,
             password: hashedPassword
         })
-        return res.status(201).json({ message: "Account created successfully", success: true })
+        return res.status(201).json({ message: "Account created successfully", success: true, data: data })
     } catch (error) {
         return res.status(500).json({ message: "Oops!!, an error occurred while registering", success: false, error: error.message })
     }
